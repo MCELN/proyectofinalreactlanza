@@ -1,0 +1,8 @@
+.myClass {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbarLeft {
+    display: flex;
+}

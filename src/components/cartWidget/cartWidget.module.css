@@ -1,0 +1,9 @@
+.cartCount {
+    display: flex;
+    align-items: center;
+}
+
+.cartCount span {
+    padding-left: 10px;
+}
+
