@@ -1,11 +1,11 @@
 import React from 'react';
-import { Ellipsis } from 'react-pure-spinners';
+import { Ripple } from 'react-pure-spinners';
 import style from './loading.module.css';
 
 const Loading = () => {
     return (
         <div className={style.loading}>
-            <Ellipsis />
+            <Ripple />
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../context/CartContext';
@@ -10,8 +11,10 @@ const CartWidget = () => {
 
     return (
         <div className={style.cartCount}>
-            <FontAwesomeIcon icon={faCartShopping} />
-            <span>{counter}</span>
+            <Link to='/cartShop' className={style.link}>
+                <FontAwesomeIcon icon={faCartShopping} />
+                <span>{counter}</span>
+            </Link>
         </div>
     )
 }

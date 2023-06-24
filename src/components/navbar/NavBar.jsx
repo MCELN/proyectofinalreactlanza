@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -6,8 +7,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import CartWidget from '../cartWidget/CartWidget';
 import { Link } from 'react-router-dom';
 import style from './navbar.module.css';
+import { LoginContext } from '../../context/LoginContext';
 
 const NavBar = () => {
+
+    const [users] = useContext(LoginContext);
+
     return (
         <Navbar expand="lg" className="bg-body-secondary">
             <Container className={style.myClass}>
@@ -26,8 +31,9 @@ const NavBar = () => {
                     </Nav>
                     </Navbar.Collapse>
                 </div>
-                <div>
-                    <CartWidget />
+                <div className='d-flex'>
+                    <Link to={users ? '/products' : '/login'} className='text-dark text-decoration-none mx-3'>{users ? users : "Iniciar Sesión"}</Link>
+                    {users && <CartWidget />}
                 </div>
             </Container>            
         </Navbar>
