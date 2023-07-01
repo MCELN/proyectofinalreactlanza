@@ -5,7 +5,6 @@ import NavBar from '../components/navbar/NavBar';
 import Item from '../pages/Item';
 import Category from '../pages/Category';
 import Home from '../pages/Home';
-import Login from '../pages/Login';
 import CartShop from '../pages/CartShop';
 
 const MainRouter = () => {
@@ -16,7 +15,6 @@ const MainRouter = () => {
                 <Route exact path='*' element={<Home />} />
                 <Route exact path='/' element={<Home />} />
                 <Route exact path='/products' element={<Products />} />
-                <Route exact path='/login' element={<Login />} />
                 <Route exact path='/cartShop' element={<CartShop />} />
                 <Route path='/products/:productId' element={<Item />} />
                 <Route path='/category/:categoryId' element={<Category />} />

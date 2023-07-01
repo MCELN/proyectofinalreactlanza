@@ -1,32 +1,58 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import style from './cartButtons.module.css';
 import { CartContext } from '../../context/CartContext';
+import { ProductsContext } from '../../context/ProductsContext';
 
 
+const CartButtons = ({ id }) => {
 
-const CartButtons = () => {
-
-    const [counter, setCounter] = useContext(CartContext);
+    const [productsData] = useContext(ProductsContext);
+    const [, lS, setLS ] = useContext(CartContext);
     const [unit, setUnit] = useState(0);
 
+    useEffect(() => {
+        const exists = lS.find(l => l.id === id);
+        if(exists) {
+            setUnit(exists.qty);
+        }
+    },[id, lS]);
+
     const handleAddClick = () => {
-        setCounter(counter + 1);
         setUnit(unit + 1);
     }
 
     const handleRemoveClick = () => {
-        counter > 0 && unit > 0 && setCounter(counter - 1);
         unit > 0 && setUnit(unit - 1);
     }
+
+    const handleAddCart = () => {
+        handleStock();
+    }
+
+    const handleStock = () => {
+        const exists = lS.find(e => e.id === id);
+        const tmpProduct = productsData.find(p => p.id === id);
+        if(!exists) {
+            setLS([...lS, { id: id, price: tmpProduct.price, qty: unit} ]);
+        } else {
+            const index = lS.findIndex(e => e.id === id);
+            lS[index].qty = (unit - lS[index].qty) + lS[index].qty;
+            if(lS[index].qty === 0) {
+                lS.splice(index, 1);
+            }
+            const newArray = lS.slice();
+            setLS(newArray);
+        }
+    };
 
     return (
         <div className={style.menuAdd}>
             <div className={style.count}>
                 <button onClick={handleRemoveClick}>-</button>
-                <input type="text" value={unit} id='valueInput' />
+                <input type="text" value={unit} id='valueInput' readOnly />
                 <button onClick={handleAddClick}>+</button>
             </div>
-            <button className={style.addCart}>Agregar al Carrito</button>
+            <button className={style.addCart} onClick={handleAddCart}>Agregar al Carrito</button>
         </div>
     )
 }

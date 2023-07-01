@@ -1,12 +1,8 @@
-import { useContext } from 'react';
 import CartButtons from '../cartButtons/CartButtons';
 import style from "./itemDetailContainer.module.css";
-import { LoginContext } from '../../context/LoginContext';
 
 
 const ItemDetailContainer = ({productData}) => {
-
-    const [users] = useContext(LoginContext);
 
     const {id, brand, image, product, description, category, price} = productData;
 
@@ -22,8 +18,7 @@ const ItemDetailContainer = ({productData}) => {
                     <p className={style.gender}>{category[0].toUpperCase() + category.substring(1)}</p>
                     <p className={style.description}>{description}</p>
                     <p className={style.price}>{`Precio: $ ${price}`}</p>
-                    {users && <CartButtons />}
-
+                    <CartButtons id={id}/>
                 </div>
             </div>
         </div>

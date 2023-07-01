@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import ItemListContainer from '../components/itemListContainer/ItemListContainer';
 import Loading from '../components/loading/Loading';
+import { ProductsContext } from '../context/ProductsContext';
 
 
 const Category = () => {
 
-    const [productsData, setProductsData] = useState([]);
+    const [, setProductsData] = useContext(ProductsContext);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
@@ -32,12 +33,12 @@ const Category = () => {
         })
         .catch((error) => setError(true))
         .then(() => setLoading(false));
-    }, [categoryId]);
+    }, [categoryId, setProductsData]);
 
     return (
         <div>
             {loading ? <Loading /> : error ? "ERROR" : 
-            <ItemListContainer productsData={productsData} />
+            <ItemListContainer />
             }
         </div>
     )
