@@ -17,7 +17,7 @@ const Products = () => {
         handleFirebase()
         .catch((error) => setError(true))
         .then(() => setLoading(false));
-    }, [handleFirebase]);
+    }, []);
 
     return (
         <div>

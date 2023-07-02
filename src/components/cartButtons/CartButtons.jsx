@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import style from './cartButtons.module.css';
 import { CartContext } from '../../context/CartContext';
 import { ProductsContext } from '../../context/ProductsContext';
+import Swal from 'sweetalert2';
 
 
 const CartButtons = ({ id }) => {
@@ -9,11 +10,14 @@ const CartButtons = ({ id }) => {
     const [productsData] = useContext(ProductsContext);
     const [, lS, setLS ] = useContext(CartContext);
     const [unit, setUnit] = useState(0);
+    const [prevUnit, setPrevUnit] = useState(0);//En caso que supere el stock, el número de productos vuelve al ya cargado.
 
-    useEffect(() => {
+
+    useEffect(() => {//Carga la cantidad de productos ya agregados al carrito.
         const exists = lS.find(l => l.id === id);
         if(exists) {
             setUnit(exists.qty);
+            setPrevUnit(exists.qty);
         }
     },[id, lS]);
 
@@ -32,8 +36,17 @@ const CartButtons = ({ id }) => {
     const handleStock = () => {
         const exists = lS.find(e => e.id === id);
         const tmpProduct = productsData.find(p => p.id === id);
-        if(!exists) {
-            setLS([...lS, { id: id, price: tmpProduct.price, qty: unit} ]);
+        if(tmpProduct.stock < unit) {
+            Swal.fire({
+                icon: 'error',
+                title: 'No disponemos de ese Stock',
+                text: `${tmpProduct.stock === 0 ? 'Lo sentimos. Este producto está sin stock' : `Sólo tenemos ${tmpProduct.stock} de este producto`}`,
+            })
+            setUnit(prevUnit);
+
+        } else if(!exists) {
+            setLS([...lS, { ...tmpProduct, qty: unit} ]);
+            setPrevUnit(unit);
         } else {
             const index = lS.findIndex(e => e.id === id);
             lS[index].qty = (unit - lS[index].qty) + lS[index].qty;
@@ -42,8 +55,9 @@ const CartButtons = ({ id }) => {
             }
             const newArray = lS.slice();
             setLS(newArray);
+            setPrevUnit(unit);
+            }
         }
-    };
 
     return (
         <div className={style.menuAdd}>

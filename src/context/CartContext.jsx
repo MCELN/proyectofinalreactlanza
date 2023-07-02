@@ -8,9 +8,6 @@ export const CartProvider = ({ children }) => {
     const [lS, setLS ] = useState(JSON.parse(localStorage.getItem('Cart')) || []);
 
     useEffect(() => {
-        if(lS.length === 1 && lS[0].qty === 0) {
-            lS.pop();
-        }
         if(lS.length > 0) {
             const cartQty = lS.reduce((a, b) => a + b.qty, 0);
             setCounter(cartQty);
