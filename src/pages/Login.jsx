@@ -5,13 +5,16 @@ import { LoginContext } from '../context/LoginContext';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import style from './css/registerUser.module.css';
+import { CartContext } from '../context/CartContext';
 
 const Login = () => {
 
     const [ users, handleFirebaseUsers, ] = useContext(UsersContext);
     const [ currentUser, setCurrentUser ] = useContext(LoginContext);
+    const [ ,,setLS ] = useContext(CartContext);
     const [ user, setUser ] = useState('');
     const [ pass, setPass ] = useState('');
+    const [ remember, setRemember ] = useState(false);
     const [ showErrorRequired, setShowErrorRequired ] = useState(false);
     const navigate = useNavigate();
 
@@ -29,13 +32,25 @@ const Login = () => {
         setShowErrorRequired(false);
     };
 
-    
+    const handleRemember = (e) => {
+        if(e.target.checked) {
+            setRemember(true);
+        } else {
+            setRemember(false);
+        }
+    }
 
     const handleConfirm = () => {
         if(user !== '' && pass !== '') {
             const checkUser = users.find(u => u.pass === pass && (u.user === user || u.email === user));
             if(checkUser !== undefined) {
                 setCurrentUser(checkUser);
+                if(remember) {
+                    localStorage.setItem("User", JSON.stringify({user: checkUser.user}));
+                } else {
+                    sessionStorage.setItem("User", JSON.stringify({user: checkUser.user}));
+                }
+            setLS(JSON.parse(localStorage.getItem(checkUser.user)) || []);
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -71,10 +86,10 @@ const Login = () => {
                         onChange={handlePass}
                         required />
                 </div>
-                {/* <div className={style.checkbox}>
+                <div className={style.checkbox}>
                     <label htmlFor="remember">Recordar: </label>
                     <input type="checkbox" name='remember' value={false} onChange={handleRemember}/>                    
-                </div> */}
+                </div>
                 {showErrorRequired && <p style={{color: 'red', fontSize: 16}}>Todos los campos son requeridos.</p>}
                 <button onClick={handleConfirm}>Confirmar</button>
                 <Link className={style.link} to={'/login/register'}>Registrarse</Link>

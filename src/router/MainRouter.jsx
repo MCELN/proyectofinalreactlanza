@@ -8,6 +8,7 @@ import Home from '../pages/Home';
 import CartShop from '../pages/CartShop';
 import Login from '../pages/Login';
 import RegisterUser from '../pages/RegisterUser';
+import LogOut from '../components/logOut/LogOut';
 
 const MainRouter = () => {
     return (
@@ -22,6 +23,7 @@ const MainRouter = () => {
                 <Route path='/category/:categoryId' element={<Category />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/login/register' element={<RegisterUser />} />
+                <Route path='/logout' element={<LogOut />} />
             </Routes>
         </Router>
     );
