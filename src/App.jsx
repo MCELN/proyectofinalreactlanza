@@ -3,16 +3,19 @@ import MainRouter from './router/MainRouter';
 import { CartProvider } from './context/CartContext';
 import { ProductsProvider } from './context/ProductsContext';
 import { UsersProvider } from './context/UsersContext';
+import { LoginProvider } from './context/LoginContext';
 
 function App() {
     return (
       <div>
         <UsersProvider>
-          <ProductsProvider>
-            <CartProvider>
-              <MainRouter />
-            </CartProvider>
-          </ProductsProvider>
+          <LoginProvider>
+            <ProductsProvider>
+              <CartProvider>
+                <MainRouter />
+              </CartProvider>
+            </ProductsProvider>
+          </LoginProvider>
         </UsersProvider>
       </div>
     );

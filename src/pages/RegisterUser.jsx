@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UsersContext } from '../context/UsersContext';
+import { useNavigate } from 'react-router-dom';
+import style from './css/registerUser.module.css';
+import { LoginContext } from '../context/LoginContext';
 
 
 const RegisterUser = () => {
 
     const [ users, handleFirebaseUsers, handleFirebaseAddUser ] = useContext(UsersContext);
+    const [ currentUser, ] = useContext(LoginContext);
     const [ name, setName ] = useState('');
     const [ lastname, setLastname ] = useState('');
     const [ user, setUser ] = useState('');
@@ -14,23 +18,28 @@ const RegisterUser = () => {
     const [ showErrorUser, setShowErrorUser ] = useState(false);
     const [ showErrorEmail, setShowErrorEmail ] = useState(false);
     const [ showErrorPass, setShowErrorPass ] = useState(false);
+    const [ showErrorRequired, setShowErrorRequired ] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         handleFirebaseUsers();
     }, []);
 
+    
     const handleName = (e) => {
         setName(e.target.value)
-        console.log(e.target.value);
+        setShowErrorRequired(false);
     };
 
     const handleLastname = (e) => {
         setLastname(e.target.value);
+        setShowErrorRequired(false);
     };
 
     const handleUser = (e) => {
         setShowErrorUser(false);
         setUser(e.target.value);
+        setShowErrorRequired(false);
     };
 
     const handleOnBlurUser = (e) => {
@@ -43,6 +52,7 @@ const RegisterUser = () => {
     const handleEmail = (e) => {
         setShowErrorEmail(false);
         setEmail(e.target.value)
+        setShowErrorRequired(false);
     };
 
     const handleOnBlurEmail = (e) => {
@@ -54,11 +64,13 @@ const RegisterUser = () => {
 
     const handlePass = (e) => {
         setPass(e.target.value);
+        setShowErrorRequired(false);
     };
 
     const handleConfirmPass = (e) => {
         setShowErrorPass(false);
         setConfirmPass(e.target.value);
+        setShowErrorRequired(false);
     };
 
     const handleOnBlurPass = (e) => {
@@ -67,7 +79,8 @@ const RegisterUser = () => {
         }
     };
 
-    const handleConfirm = () => {
+    const handleConfirm = (e) => {
+        e.preventDefault();
         const newUser = {
             name,
             lastname,
@@ -75,33 +88,84 @@ const RegisterUser = () => {
             email,
             pass,
         }
-        
-        if(!showErrorUser && !showErrorEmail && !showErrorPass) {
-            handleFirebaseAddUser(newUser);
+        if(name !== '' && lastname !== '' && user !== '' && email !== '' && pass !== '' && confirmPass !== ''){
+            if(!showErrorUser && !showErrorEmail && !showErrorPass){
+                handleFirebaseAddUser(newUser);
+                navigate('/login');
+            }
+        } else {
+            setShowErrorRequired(true);
         }
     }
 
 
 
     return (
+        currentUser.user !== '' ? navigate('/') :
         <div>
-            <h2>Regístrate</h2>
-            <div>
-                <label htmlFor='name'>Nombre: </label>
-                <input type="text" id='name' palceholder='Nombre' onChange={handleName} required />
-                <label htmlFor="lastname">Apellido: </label>
-                <input type="text" id='lastname' placeholder='Apellido' onChange={handleLastname} required />
-                <label htmlFor="user">Usuario: </label>
-                <input type="text" id='user' placeholder='Nombre de ususario' onChange={handleUser} onBlur={handleOnBlurUser} required />
-                {showErrorUser && <p style={{color: 'red', fontSize: '10px'}}>Usuario existente!</p>}
-                <label htmlFor="email">E-Mail: </label>
-                <input type="email" id='email' placeholder='E-Mail' onChange={handleEmail} onBlur={handleOnBlurEmail} required />
-                {showErrorEmail && <p style={{color: 'red', fontSize: '10px'}}>E-Mail existente!</p>}
-                <label htmlFor="pass">Contraseña: </label>
-                <input type="password" id='pass' placeholder='Contraseña' onChange={handlePass} required />
-                <label htmlFor="checkpass">Confirme Contraseña: </label>
-                <input type="password" id='checkpass' placeholder='Contraseña' onChange={handleConfirmPass} onBlur={handleOnBlurPass} required />
-                {showErrorPass && <p style={{color: 'red', fontSize: '10px'}}>Confirmación de contraseña incorrecta!</p>}
+            <h2 className={style.title}>Regístrate</h2>
+            <div className={style.container}>
+                <div>
+                    <input 
+                        type="text" 
+                        id='name' 
+                        name='name'
+                        placeholder='Nombre' 
+                        onChange={handleName}
+                        required />
+                </div>
+                <div>
+                    <input 
+                        type="text" 
+                        id='lastname' 
+                        name='lastname'                   
+                        placeholder='Apellido' 
+                        onChange={handleLastname}
+                        required />
+                </div>
+                <div>
+                    <input 
+                        type="text" 
+                        id='user' 
+                        name='user'                   
+                        placeholder='Nombre de ususario' 
+                        onChange={handleUser} 
+                        onBlur={handleOnBlurUser} 
+                        required />
+                </div>
+                {showErrorUser && <p style={{color: 'red', fontSize: 16}}>Usuario existente!</p>}
+                <div>
+                    <input 
+                        type="email" 
+                        id='email' 
+                        name='email'                
+                        placeholder='E-Mail' 
+                        onChange={handleEmail} 
+                        onBlur={handleOnBlurEmail} 
+                        required />
+                </div>
+                {showErrorEmail && <p style={{color: 'red', fontSize: 16}}>E-Mail existente!</p>}
+                <div>
+                    <input 
+                        type="password" 
+                        id='pass' 
+                        name='pass'                
+                        placeholder='Contraseña' 
+                        onChange={handlePass}
+                        required />
+                </div>
+                <div>
+                    <input 
+                        type="password" 
+                        id='confirmPass' 
+                        name='confirmPass'                   
+                        placeholder='Contraseña' 
+                        onChange={handleConfirmPass} 
+                        onBlur={handleOnBlurPass} 
+                        required />
+                </div>
+                {showErrorPass && <p style={{color: 'red', fontSize: 16}}>Confirmación de contraseña incorrecta!</p>}
+                {showErrorRequired && <p style={{color: 'red', fontSize: 16}}>Todos los campos son requeridos.</p>}
                 <button onClick={handleConfirm}>Confirmar</button>
             </div>
         </div>

@@ -6,8 +6,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import CartWidget from '../cartWidget/CartWidget';
 import { Link } from 'react-router-dom';
 import style from './navbar.module.css';
+import { useContext } from 'react';
+import { LoginContext } from '../../context/LoginContext';
 
 const NavBar = () => {
+
+    const [ currentUser ] = useContext(LoginContext);
 
     return (
         <Navbar expand="lg" className="bg-body-secondary">
@@ -28,7 +32,16 @@ const NavBar = () => {
                     </Navbar.Collapse>
                 </div>
                 <div>
-                    <CartWidget />
+                    {currentUser.user !== '' ? 
+                    <div className='d-flex'>
+                        <NavDropdown title={currentUser.user} id="basic-nav-dropdown" className='text-dark text-decoration-none m-3'>
+
+                        <NavDropdown.Item>Perfil</NavDropdown.Item>
+                        <NavDropdown.Item>Cerrar Sesión</NavDropdown.Item>
+                        </NavDropdown>
+                        <CartWidget />
+                    </div> : 
+                    <Link to='/login' className='text-dark text-decoration-none'>Iniciar Sesión</Link>}
                 </div>
             </Container>            
         </Navbar>

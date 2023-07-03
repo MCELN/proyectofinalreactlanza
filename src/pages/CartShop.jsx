@@ -1,13 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { CartContext } from '../context/CartContext'
-import style from './cartShop.module.css';
+import style from './css/cartShop.module.css';
 import CartButtons from '../components/cartButtons/CartButtons';
+import { LoginContext } from '../context/LoginContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const CartShop = () => {
 
+    const [ currentUser ] = useContext(LoginContext);
     const [ , lS, setLS ] = useContext(CartContext);
     const [ total, setTotal ] = useState(0);
     const [ cartLS, setCartLS ] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const tmpTotal = lS.reduce((a, b) => a + (b.price * b.qty), 0);
@@ -23,7 +28,7 @@ const CartShop = () => {
     }
 
     return (
-
+        currentUser.user === '' ? navigate('/') :
         <div>
             <div>
             <h2>Detalle de la compra:</h2>
