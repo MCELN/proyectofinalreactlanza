@@ -5,6 +5,7 @@ import CartButtons from '../components/cartButtons/CartButtons';
 import { LoginContext } from '../context/LoginContext';
 import { useNavigate } from 'react-router-dom';
 import PayButton from '../components/payButton/PayButton';
+import { Link } from 'react-router-dom';
 
 
 const CartShop = () => {
@@ -48,7 +49,9 @@ const CartShop = () => {
                     return (
                         <div className={style.container} key={id}>
                             <h3>{brand}</h3>
-                            <img src={image} alt={product} />
+                            <Link to={`/products/${id}`}>
+                                <img src={image} alt={product} />
+                            </Link>
                             <p>{product}</p>
                             <p>{`$ ${price}`}</p>
                             <p>{qty}</p>
@@ -62,7 +65,7 @@ const CartShop = () => {
                     <h3>Total:</h3>
                     <p>{`$ ${total}`}</p>
                 </div>
-                <div>
+                <div className={style.payButton}>
                     <PayButton total={total} />
                 </div>
             </div>

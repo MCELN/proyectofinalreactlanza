@@ -1,3 +1,8 @@
+.MyNavbar {
+    position: sticky;
+    top: 0;
+}
+
 .myClass {
     display: flex;
     justify-content: space-around;

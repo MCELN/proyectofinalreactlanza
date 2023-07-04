@@ -1,0 +1,30 @@
+h2 {
+    text-align: center;
+    font-size: 50px;
+    margin: 4rem;
+    font-weight: bold;
+}
+
+.brands {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    margin: 5rem auto;
+    gap: 3rem;
+}
+
+.brands p {
+    padding: 15%;
+    text-align: center;
+    align-items: center;
+    border: 2px solid #f5f5f5;
+    font-size: 18px;
+}
+
+.brands img {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    width: 500px;
+
+}

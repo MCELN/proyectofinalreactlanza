@@ -14,6 +14,7 @@ const NavBar = () => {
     const [ currentUser ] = useContext(LoginContext);
 
     return (
+        <div className={style.MyNavbar}>
         <Navbar expand="lg" className="bg-body-secondary">
             <Container className={style.myClass}>
                 <div className={style.navbarLeft}>
@@ -48,6 +49,7 @@ const NavBar = () => {
                 </div>
             </Container>            
         </Navbar>
+        </div>
     );
 }
 
