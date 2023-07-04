@@ -37,7 +37,7 @@ const StockButton = ({ id }) => {
                 <input type="text" value={unit} id='valueInput' readOnly />
                 <button onClick={handleAddClick}>+</button>
             </div>
-            <button className={style.addCart} onClick={handleAddStock}>Modificar Stock</button>
+            <button className={style.addCart} onClick={handleAddStock}>Modificar Stock</button><span>{`Stock: ${productsData.find(p => p.id === id).stock}`}</span>
         </div>
     )
 }

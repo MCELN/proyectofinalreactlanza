@@ -22,6 +22,10 @@ const Login = () => {
         handleFirebaseUsers();
     }, []);
 
+    useEffect(() => {
+        currentUser.user !== '' && navigate('/');
+    }, [currentUser, navigate]);
+
     const handleUser = (e) => {
         setUser(e.target.value)
         setShowErrorRequired(false);
@@ -64,7 +68,6 @@ const Login = () => {
     };
 
     return (
-        currentUser.user !== '' ? navigate('/') :
         <div>
             <h2 className={style.title}>Iniciar Sesión</h2>
             <div className={style.container}>

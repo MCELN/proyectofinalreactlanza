@@ -7,7 +7,7 @@
     margin: 10px;
     flex-direction: column;
     width: 300px;
-    height: 470px;
+    height: 500px;
     border: 1px solid black;
     color: black;
     border-radius: 10px;
@@ -34,7 +34,7 @@
 }
 
 .boxProduc .link {
-    height: 35%;
+    height: 32%;
 }
 
 .link img {

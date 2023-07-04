@@ -17,20 +17,20 @@ const NavBar = () => {
         <Navbar expand="lg" className="bg-body-secondary">
             <Container className={style.myClass}>
                 <div className={style.navbarLeft}>
-                    <Navbar.Brand><Link to='/' className='text-dark text-decoration-none'>Fragancias de Nicho</Link></Navbar.Brand>
+                    <Navbar.Brand as={Link} to='/'>Fragancias de Nicho</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link><Link to='/' className='text-dark text-decoration-none'>Home</Link></Nav.Link>
-                        <Nav.Link><Link to='/products' className='text-dark text-decoration-none'>Productos</Link></Nav.Link>
+                        <Nav.Link as={Link} to='/'>Home</Nav.Link>
+                        <Nav.Link as={Link} to='/products'>Productos</Nav.Link>
                         <NavDropdown title="Category" id="basic-nav-dropdown">
-                        <NavDropdown.Item><Link to='/category/male' className='text-dark text-decoration-none'>Fragancias masculinas</Link></NavDropdown.Item>
-                        <NavDropdown.Item><Link to='/category/female' className='text-dark text-decoration-none'>Fragancias Femeninas</Link></NavDropdown.Item>
-                        <NavDropdown.Item><Link to='/category/unisex' className='text-dark text-decoration-none'>Unisex</Link></NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to='/category/male'>Fragancias masculinas</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to='/category/female'>Fragancias Femeninas</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to='/category/unisex'>Unisex</NavDropdown.Item>
                         </NavDropdown>
                         {currentUser.lvl === 'admin' &&
                         <NavDropdown title='Administrar' id="basic-nav-dropdown">
-                        <NavDropdown.Item><Link to={'/admin'} className='text-dark text-decoration-none'>Productos</Link></NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to={'/admin'}>Productos</NavDropdown.Item>
                         </NavDropdown>
                         }
                     </Nav>
@@ -40,7 +40,7 @@ const NavBar = () => {
                     {currentUser.user !== '' ? 
                     <div className='d-flex'>
                         <NavDropdown title={currentUser.user} id="basic-nav-dropdown" className='text-dark text-decoration-none m-3'>
-                        <NavDropdown.Item><Link to={'/logout'} className='text-dark text-decoration-none'>Cerrar Sesión</Link></NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to='/logout'>Cerrar Sesión</NavDropdown.Item>
                         </NavDropdown>
                         <CartWidget />
                     </div> : 
