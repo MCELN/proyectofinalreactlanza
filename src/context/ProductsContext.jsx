@@ -1,5 +1,7 @@
 import { useState, createContext } from 'react';
-import { getFirestore, collection, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, doc, updateDoc, addDoc } from 'firebase/firestore';
+import Swal from 'sweetalert2';
+
 
 export const ProductsContext = createContext();
 
@@ -31,8 +33,24 @@ export const ProductsProvider = ({ children }) => {
         
     }
 
+    const handleFirebaseAddProduct = async (newProduct) => {
+        const db = getFirestore();
+
+        const newUsersCollection = collection(db, 'products');
+        await addDoc(newUsersCollection, newProduct)
+        .then(({ id }) => {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `Su producto ${newProduct.product} se ha agregado correctamente`,
+                showConfirmButton: false,
+                timer: 2500
+            })
+        });
+    };
+
     return (
-        <ProductsContext.Provider value={[ productsData, setProductsData, handleFirebase, handleEditFirebase ]}>
+        <ProductsContext.Provider value={[ productsData, setProductsData, handleFirebase, handleEditFirebase, handleFirebaseAddProduct ]}>
             {children}
         </ProductsContext.Provider>
     )
