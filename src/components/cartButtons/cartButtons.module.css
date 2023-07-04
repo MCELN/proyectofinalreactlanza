@@ -6,7 +6,7 @@
 }
 
 .count {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .count button {
@@ -15,7 +15,7 @@
     border: 1px solid gold;
     width: 2rem;
     height: 2rem;
-    margin: 0.7rem;
+    margin: 5px 0.7rem;
 }
 .count input {
     width: 30px;

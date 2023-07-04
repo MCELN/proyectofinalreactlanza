@@ -17,7 +17,6 @@ export const CartProvider = ({ children }) => {
             setCounter(0);
         }
         localStorage.setItem(currentUser.user, JSON.stringify(lS));
-        console.log(lS);
     },[lS, currentUser.user]);
 
     return (

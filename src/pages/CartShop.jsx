@@ -4,6 +4,7 @@ import style from './css/cartShop.module.css';
 import CartButtons from '../components/cartButtons/CartButtons';
 import { LoginContext } from '../context/LoginContext';
 import { useNavigate } from 'react-router-dom';
+import PayButton from '../components/payButton/PayButton';
 
 
 const CartShop = () => {
@@ -60,6 +61,9 @@ const CartShop = () => {
                 <div className={style.total}>
                     <h3>Total:</h3>
                     <p>{`$ ${total}`}</p>
+                </div>
+                <div>
+                    <PayButton total={total} />
                 </div>
             </div>
         </div>

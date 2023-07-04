@@ -28,6 +28,11 @@ const NavBar = () => {
                         <NavDropdown.Item><Link to='/category/female' className='text-dark text-decoration-none'>Fragancias Femeninas</Link></NavDropdown.Item>
                         <NavDropdown.Item><Link to='/category/unisex' className='text-dark text-decoration-none'>Unisex</Link></NavDropdown.Item>
                         </NavDropdown>
+                        {currentUser.lvl === 'admin' &&
+                        <NavDropdown title='Administrar' id="basic-nav-dropdown">
+                        <NavDropdown.Item><Link to={'/admin'} className='text-dark text-decoration-none'>Productos</Link></NavDropdown.Item>
+                        </NavDropdown>
+                        }
                     </Nav>
                     </Navbar.Collapse>
                 </div>
@@ -35,7 +40,6 @@ const NavBar = () => {
                     {currentUser.user !== '' ? 
                     <div className='d-flex'>
                         <NavDropdown title={currentUser.user} id="basic-nav-dropdown" className='text-dark text-decoration-none m-3'>
-                        <NavDropdown.Item>Perfil</NavDropdown.Item>
                         <NavDropdown.Item><Link to={'/logout'} className='text-dark text-decoration-none'>Cerrar Sesión</Link></NavDropdown.Item>
                         </NavDropdown>
                         <CartWidget />

@@ -12,7 +12,6 @@ const CartButtons = ({ id }) => {
     const [unit, setUnit] = useState(0);
     const [prevUnit, setPrevUnit] = useState(0);//En caso que supere el stock, el número de productos vuelve al ya cargado.
 
-
     useEffect(() => {//Carga la cantidad de productos ya agregados al carrito.
         const exists = lS.find(l => l.id === id);
         if(exists) {

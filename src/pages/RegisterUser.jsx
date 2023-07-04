@@ -87,6 +87,7 @@ const RegisterUser = () => {
             user,
             email,
             pass,
+            lvl: 'customer',
         }
         if(name !== '' && lastname !== '' && user !== '' && email !== '' && pass !== '' && confirmPass !== ''){
             if(!showErrorUser && !showErrorEmail && !showErrorPass){

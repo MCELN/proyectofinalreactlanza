@@ -1,5 +1,7 @@
 import { createContext, useState } from 'react';
 import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore';
+import Swal from 'sweetalert2';
+
 
 export const UsersContext = createContext();
 
@@ -22,7 +24,15 @@ export const UsersProvider = ({ children }) => {
 
         const newUsersCollection = collection(db, 'users');
         await addDoc(newUsersCollection, newUser)
-        .then(({ id }) => console.log(id));
+        .then(({ id }) => {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `Bienvenido a Fragiancias de Nicho ${newUser.name}!!!`,
+                showConfirmButton: false,
+                timer: 2500
+            })
+        });
     };
 
 

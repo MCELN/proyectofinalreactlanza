@@ -3,12 +3,13 @@ import CartButtons from '../cartButtons/CartButtons';
 import style from './productCard.module.css';
 import { useContext } from 'react';
 import { LoginContext } from '../../context/LoginContext';
+import StockButton from '../admin/StockButton';
 
 
 
 const ProductCard = ({ productsData }) => {
     
-    const [ currentUser ] = useContext(LoginContext);
+    const [ currentUser,, stock ] = useContext(LoginContext);
     const {id, brand, product, image, price} = productsData;
     return (
 
@@ -20,7 +21,7 @@ const ProductCard = ({ productsData }) => {
                     </Link>            
                     <p>{product}</p>
                     <p className={style.buy}>{`$ ${price}`}</p>
-                    {currentUser.user !== '' && <CartButtons id={id}/>}
+                    {stock ? <StockButton id={id} /> : currentUser.user !== '' && <CartButtons id={id}/>}
                 </div>
         </div>
     )

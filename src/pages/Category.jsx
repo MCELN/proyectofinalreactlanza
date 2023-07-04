@@ -4,11 +4,13 @@ import { collection, getDocs, getFirestore, query, where } from 'firebase/firest
 import ItemListContainer from '../components/itemListContainer/ItemListContainer';
 import Loading from '../components/loading/Loading';
 import { ProductsContext } from '../context/ProductsContext';
+import { LoginContext } from '../context/LoginContext';
 
 
 const Category = () => {
 
     const [, setProductsData] = useContext(ProductsContext);
+    const [ ,,,setStock ] = useContext(LoginContext);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
@@ -33,7 +35,9 @@ const Category = () => {
         })
         .catch((error) => setError(true))
         .then(() => setLoading(false));
-    }, [categoryId, setProductsData]);
+
+        setStock(false);
+    }, [categoryId, setProductsData, setStock]);
 
     return (
         <div>

@@ -9,6 +9,7 @@ import CartShop from '../pages/CartShop';
 import Login from '../pages/Login';
 import RegisterUser from '../pages/RegisterUser';
 import LogOut from '../components/logOut/LogOut';
+import AdminProduct from '../components/admin/AdminProduct';
 
 const MainRouter = () => {
     return (
@@ -24,6 +25,7 @@ const MainRouter = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/login/register' element={<RegisterUser />} />
                 <Route path='/logout' element={<LogOut />} />
+                <Route path='/admin' element={<AdminProduct />} />
             </Routes>
         </Router>
     );

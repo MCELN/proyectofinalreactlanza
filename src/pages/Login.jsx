@@ -46,9 +46,9 @@ const Login = () => {
             if(checkUser !== undefined) {
                 setCurrentUser(checkUser);
                 if(remember) {
-                    localStorage.setItem("User", JSON.stringify({user: checkUser.user}));
+                    localStorage.setItem("User", JSON.stringify({user: checkUser.user, lvl: checkUser.lvl}));
                 } else {
-                    sessionStorage.setItem("User", JSON.stringify({user: checkUser.user}));
+                    sessionStorage.setItem("User", JSON.stringify({user: checkUser.user, lvl: checkUser.lvl}));
                 }
             setLS(JSON.parse(localStorage.getItem(checkUser.user)) || []);
             } else {
