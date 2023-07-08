@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
-import style from '../../pages/css/registerUser.module.css';
 import { ProductsContext } from '../../context/ProductsContext';
 import { useNavigate } from 'react-router-dom';
+import style from '../../pages/css/registerUser.module.css';
 
 
 
@@ -45,7 +45,7 @@ const AddProduct = () => {
 
     return (
         <div>
-            <h2 className={style.title}>Regístrate</h2>
+            <h2 className={style.title}>Agregar producto</h2>
             <div className={style.container}>
                 <form onSubmit={handleForm}>
                     <input 
@@ -87,7 +87,7 @@ const AddProduct = () => {
                         placeholder='Male, Female o Unisex' 
                         onChange={handleInputChange}
                     />
-
+                    <label htmlFor="price">Precio:</label>
                     <input 
                         type="number"
                         name='price'  
@@ -95,7 +95,7 @@ const AddProduct = () => {
                         placeholder='Precio' 
                         onChange={handleInputChange}
                     />
-                    
+                    <label htmlFor="stock">Stock:</label>
                     <input 
                         type="number"
                         name='stock'
@@ -104,7 +104,7 @@ const AddProduct = () => {
                         onChange={handleInputChange}
                     />
 
-                <button type='submit'>Confirmar</button>
+                <button type='submit' className={style.buttonAddProd}>Confirmar</button>
                 </form>
             </div>
         </div>
