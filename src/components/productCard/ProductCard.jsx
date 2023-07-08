@@ -11,18 +11,22 @@ const ProductCard = ({ productsData }) => {
     
     const [ currentUser,, stock ] = useContext(LoginContext);
     const {id, brand, product, image, price} = productsData;
+    
     return (
 
         <div>
-                <div key={id} className={style.boxProduc}>
-                    <h3>{brand}</h3>
-                    <Link to={`/products/${id}`} className={style.link}>
-                        <img src={image} alt={product} />
-                    </Link>            
-                    <p>{product}</p>
-                    <p className={style.buy}>{`$ ${price}`}</p>
-                    {stock ? <StockButton id={id} /> : currentUser.user !== '' && <CartButtons id={id}/>}
-                </div>
+            <div key={id} className={style.boxProduc}>
+                <h3>{brand}</h3>
+                <Link to={`/products/${id}`} className={style.link}>
+                    <img src={image} alt={product} />
+                </Link>            
+                <p>{product}</p>
+                <p className={style.buy}>{`$ ${price}`}</p>
+                {stock ? 
+                    <StockButton id={id} />
+                    : currentUser.user !== '' && 
+                    <CartButtons id={id}/>}
+            </div>
         </div>
     )
 }

@@ -43,10 +43,10 @@ const CartButtons = ({ id }) => {
             })
             setUnit(prevUnit);
 
-        } else if(!exists) {
+        } else if(!exists && unit > 0) {
             setLS([...lS, { ...tmpProduct, qty: unit} ]);
             setPrevUnit(unit);
-        } else {
+        } else if(unit > 0) {
             const index = lS.findIndex(e => e.id === id);
             lS[index].qty = (unit - lS[index].qty) + lS[index].qty;
             if(lS[index].qty === 0) {
