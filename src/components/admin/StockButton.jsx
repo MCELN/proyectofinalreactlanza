@@ -19,15 +19,17 @@ const StockButton = ({ id }) => {
     const handleAddStock = async () => {
         const newStock = productsData.find(p => p.id === id);
         newStock.stock += unit;
-        await handleEditFirebase(newStock.id, newStock);
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: `Ha agregado ${unit} de stock al producto ${newStock.product}.`,
-            showConfirmButton: false,
-            timer: 2500
-        })
-        setUnit(0);
+        if(unit > 0) {
+            await handleEditFirebase(newStock.id, newStock);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `Ha agregado ${unit} de stock al producto ${newStock.product}.`,
+                showConfirmButton: false,
+                timer: 2500
+            })
+            setUnit(0);
+        }
     }
 
     return (
