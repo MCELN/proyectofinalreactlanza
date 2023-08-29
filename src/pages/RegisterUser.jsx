@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { UsersContext } from '../context/UsersContext';
 import { useNavigate } from 'react-router-dom';
 import style from './css/registerUser.module.css';
@@ -21,9 +21,7 @@ const RegisterUser = () => {
     const [ showErrorRequired, setShowErrorRequired ] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        handleFirebaseUsers();
-    }, []);
+    handleFirebaseUsers();
 
     
     const handleName = (e) => {

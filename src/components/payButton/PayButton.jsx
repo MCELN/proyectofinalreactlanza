@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import { ProductsContext } from '../../context/ProductsContext';
@@ -14,11 +14,9 @@ const PayButton = ({total}) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    useEffect(() => {
-        handleFirebase()
+    handleFirebase()
         .catch((error) => setError(true))
         .then(() => setLoading(false));
-    }, []);
 
     const handlePay = async () => {
         const tempProd = productsData.filter((p) => lS.find(s => s.id === p.id));

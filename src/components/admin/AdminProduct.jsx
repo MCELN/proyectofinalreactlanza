@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import style from './adminProduct.module.css';
 import Loading from '../loading/Loading';
 import ItemListContainer from '../itemListContainer/ItemListContainer';
@@ -16,12 +16,10 @@ const AdminProduct = () => {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        handleFirebase()
+    handleFirebase()
         .catch((error) => setError(true))
         .then(() => setLoading(false));
         setStock(true);
-    }, []);
 
     const handleStock = () => {
         setSelectOption("stock");

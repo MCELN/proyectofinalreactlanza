@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import ItemListContainer from '../components/itemListContainer/ItemListContainer';
 import Loading from '../components/loading/Loading';
 
@@ -15,12 +15,10 @@ const Products = () => {
     const [error, setError] = useState(false);
     
 
-    useEffect(() => {
-        handleFirebase()
+    handleFirebase()
         .catch((error) => setError(true))
         .then(() => setLoading(false));
         setStock(false);
-    }, []);
 
     return (
         <div>

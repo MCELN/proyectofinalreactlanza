@@ -18,9 +18,7 @@ const Login = () => {
     const [ showErrorRequired, setShowErrorRequired ] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        handleFirebaseUsers();
-    }, []);
+    handleFirebaseUsers();
 
     useEffect(() => {
         currentUser.user !== '' && navigate('/');
