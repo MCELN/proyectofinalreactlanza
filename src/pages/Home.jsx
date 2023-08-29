@@ -1,4 +1,5 @@
 import style from './css/home.module.css';
+import Footer from '../components/footer/Footer';
 
 const Home = () => {
     return (
@@ -27,6 +28,7 @@ const Home = () => {
                 </p>
                 <img src="../assets/logoMontaleParis.png" alt="Logo Cread" />
             </div>
+            <Footer />
         </div>
     )
 }
